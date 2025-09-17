@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h1 class="mb-0">About Ketha Store</h1>
+                </div>
+                <div class="card-body">
+                    <h2>Our Story</h2>
+                    <p class="lead">
+                        Welcome to Ketha Store, your one-stop destination for high-quality products at affordable prices.
+                    </p>
+                    
+                    <p>
+                        Founded in 2023, Ketha Store started with a simple mission: to provide customers with exceptional products and outstanding service. 
+                        What began as a small online shop has grown into a trusted marketplace offering a wide range of products across multiple categories.
+                    </p>
+                    
+                    <h2 class="mt-4">Our Mission</h2>
+                    <p>
+                        At Ketha Store, we believe in:
+                    </p>
+                    <ul>
+                        <li><strong>Quality:</strong> We carefully select each product to ensure it meets our high standards.</li>
+                        <li><strong>Affordability:</strong> We strive to offer competitive prices without compromising on quality.</li>
+                        <li><strong>Customer Satisfaction:</strong> Your happiness is our priority. We're committed to providing excellent service at every step.</li>
+                        <li><strong>Innovation:</strong> We continuously update our catalog with the latest products to meet evolving customer needs.</li>
+                    </ul>
+                    
+                    <h2 class="mt-4">Our Team</h2>
+                    <p>
+                        Behind Ketha Store is a dedicated team of professionals passionate about delivering the best shopping experience. 
+                        From our product curators to our customer service representatives, everyone works together to ensure you have a seamless shopping journey.
+                    </p>
+                    
+                    <div class="row mt-5">
+                        <div class="col-md-4 text-center mb-4">
+                            <div class="rounded-circle bg-light d-inline-flex justify-content-center align-items-center" style="width: 150px; height: 150px;">
+                                <i class="fas fa-user fa-4x text-primary"></i>
+                            </div>
+                            <h4 class="mt-3">John Doe</h4>
+                            <p class="text-muted">Founder & CEO</p>
+                        </div>
+                        <div class="col-md-4 text-center mb-4">
+                            <div class="rounded-circle bg-light d-inline-flex justify-content-center align-items-center" style="width: 150px; height: 150px;">
+                                <i class="fas fa-user fa-4x text-primary"></i>
+                            </div>
+                            <h4 class="mt-3">Jane Smith</h4>
+                            <p class="text-muted">Head of Operations</p>
+                        </div>
+                        <div class="col-md-4 text-center mb-4">
+                            <div class="rounded-circle bg-light d-inline-flex justify-content-center align-items-center" style="width: 150px; height: 150px;">
+                                <i class="fas fa-user fa-4x text-primary"></i>
+                            </div>
+                            <h4 class="mt-3">Mike Johnson</h4>
+                            <p class="text-muted">Customer Relations</p>
+                        </div>
+                    </div>
+                    
+                    <h2 class="mt-4">Join Our Journey</h2>
+                    <p>
+                        We're grateful for the trust our customers place in us. As we continue to grow, we invite you to be part of our journey. 
+                        Shop with us, share your feedback, and help us improve to serve you better.
+                    </p>
+                    
+                    <div class="text-center mt-4">
+                        <a href="{{ url_for('main.contact') }}" class="btn btn-primary">Contact Us</a>
+                        <a href="{{ url_for('product.all_products') }}" class="btn btn-outline-primary ml-2">Explore Our Products</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

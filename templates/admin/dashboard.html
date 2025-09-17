@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Admin Dashboard</h1>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-header">Products</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ product_count }}</h5>
+                    <p class="card-text">Total Products</p>
+                    <a href="{{ url_for('admin.manage_products') }}" class="btn btn-light">Manage Products</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-header">Orders</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ order_count }}</h5>
+                    <p class="card-text">Total Orders</p>
+                    <a href="#" class="btn btn-light">View Orders</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-header">Users</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ user_count }}</h5>
+                    <p class="card-text">Registered Users</p>
+                    <a href="#" class="btn btn-light">Manage Users</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <h2>Recent Orders</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in recent_orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.user.username }}</td>
+                    <td>{{ order.order_date.strftime('%Y-%m-%d %H:%M') }}</td>
+                    <td>{{ order.status }}</td>
+                    <td>${{ order.total_price }}</td>
+                    <td>
+                        <a href="#" class="btn btn-sm btn-info">View</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

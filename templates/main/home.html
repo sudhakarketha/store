@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="bg-primary text-white p-5 mb-4 rounded">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Welcome to Ketha Store</h1>
+        <p class="col-md-8 fs-4">Your one-stop shop for all your needs. Browse our wide selection of products at competitive prices.</p>
+        <a href="{{ url_for('product.all_products') }}" class="btn btn-light btn-lg">Shop Now</a>
+    </div>
+</div>
+
+<!-- Featured Categories -->
+<div class="row mb-4">
+    <div class="col-12">
+        <h2 class="border-bottom pb-2">Shop by Category</h2>
+    </div>
+</div>
+<div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+    {% for category in categories %}
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">{{ category.name }}</h5>
+                <p class="card-text">{{ category.description }}</p>
+                <a href="{{ url_for('product.all_products', category=category.id) }}" class="btn btn-outline-primary">Browse</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Featured Products -->
+<div class="row mb-4">
+    <div class="col-12">
+        <h2 class="border-bottom pb-2">Featured Products</h2>
+    </div>
+</div>
+<div class="row row-cols-1 row-cols-md-4 g-4">
+    {% for product in featured_products %}
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <img src="{{ url_for('static', filename='product_images/' + product.image_file) }}" class="card-img-top" alt="{{ product.name }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text text-truncate">{{ product.description }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-primary fw-bold">${{ "%.2f"|format(product.price) }}</span>
+                    <div class="btn-group">
+                        <a href="{{ url_for('product.product_detail', product_id=product.id) }}" class="btn btn-sm btn-outline-secondary">View</a>
+                        <form action="{{ url_for('cart.add_to_cart', product_id=product.id) }}" method="POST">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class="btn btn-sm btn-primary">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Promotional Banner -->
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="bg-light p-4 rounded text-center">
+            <h3>Special Offer!</h3>
+            <p class="lead">Get 10% off on your first order. Use code: <strong>KETHA10</strong></p>
+            <a href="{{ url_for('product.all_products') }}" class="btn btn-success">Shop Now</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

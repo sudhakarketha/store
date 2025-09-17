@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h1 class="mb-0">Contact Us</h1>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h2>Get in Touch</h2>
+                            <p class="lead">We'd love to hear from you! Please fill out the form and we'll get back to you as soon as possible.</p>
+                            
+                            <form>
+                                <div class="form-group">
+                                    <label for="name">Your Name</label>
+                                    <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email Address</label>
+                                    <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="subject">Subject</label>
+                                    <input type="text" class="form-control" id="subject" placeholder="Enter subject">
+                                </div>
+                                <div class="form-group">
+                                    <label for="message">Message</label>
+                                    <textarea class="form-control" id="message" rows="5" placeholder="Enter your message"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Send Message</button>
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <h2>Contact Information</h2>
+                            <p class="lead">You can also reach us using the following information:</p>
+                            
+                            <div class="mt-4">
+                                <h5><i class="fas fa-map-marker-alt mr-2 text-primary"></i> Address</h5>
+                                <p>123 Store Street, Business District<br>City, State 12345<br>Country</p>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <h5><i class="fas fa-phone mr-2 text-primary"></i> Phone</h5>
+                                <p>Customer Service: (123) 456-7890<br>Support: (123) 456-7891</p>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <h5><i class="fas fa-envelope mr-2 text-primary"></i> Email</h5>
+                                <p>General Inquiries: info@kethastore.com<br>Support: support@kethastore.com<br>Orders: orders@kethastore.com</p>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <h5><i class="fas fa-clock mr-2 text-primary"></i> Business Hours</h5>
+                                <p>Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 10:00 AM - 4:00 PM<br>Sunday: Closed</p>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <h5><i class="fas fa-share-alt mr-2 text-primary"></i> Follow Us</h5>
+                                <div class="social-icons">
+                                    <a href="#" class="btn btn-outline-primary mr-2"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#" class="btn btn-outline-primary mr-2"><i class="fab fa-twitter"></i></a>
+                                    <a href="#" class="btn btn-outline-primary mr-2"><i class="fab fa-instagram"></i></a>
+                                    <a href="#" class="btn btn-outline-primary"><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
