@@ -1,0 +1,16 @@
+# Render configuration file
+services:
+  - type: web
+    name: ketha-store
+    env: python
+    buildCommand: chmod +x ./build.sh && ./build.sh
+    startCommand: gunicorn app:app
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: FLASK_DEBUG
+        value: False
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URI
+        sync: false

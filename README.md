@@ -62,6 +62,27 @@ This guide explains how to deploy the Ketha Store application on Render with a M
 
 ### Deployment Steps
 
+#### Option 1: Using render.yaml (Recommended)
+
+1. **Push your code to a Git repository**
+
+   - Make sure your code is in a Git repository (GitHub, GitLab, etc.)
+   - The repository should include the `render.yaml` configuration file
+
+2. **Create a new service on Render using Blueprint**
+
+   - Sign in to your Render account
+   - Click on "New" and select "Blueprint"
+   - Connect your repository
+   - Render will automatically detect the `render.yaml` file and configure your service
+
+3. **Set the DATABASE_URI environment variable**
+
+   - After the service is created, go to the Environment settings
+   - Add your MySQL connection string from Clever Cloud as the `DATABASE_URI` value
+
+#### Option 2: Manual Configuration
+
 1. **Create a new Web Service on Render**
 
    - Sign in to your Render account
@@ -98,7 +119,7 @@ This guide explains how to deploy the Ketha Store application on Render with a M
 
 - **Database Connection Issues**: Ensure that the DATABASE_URI environment variable is correctly set and that the database is accessible from Render's servers.
 - **Build Failures**: Check the build logs for any errors. Common issues include missing dependencies or incorrect file paths.
-  - If you encounter Pillow installation errors, the application uses Pillow 9.5.0 which is more compatible with Render's build environment.
+   - If you encounter Pillow installation errors, the application now uses a pre-built Pillow wheel (version 8.4.0) which is installed separately in the build script to avoid compilation issues.
 - **Application Errors**: Check the application logs in the Render dashboard for detailed error messages.
 
 ## Project Structure

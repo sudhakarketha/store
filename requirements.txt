@@ -4,7 +4,7 @@ Flask-Login==0.6.2
 Flask-WTF==1.1.1
 WTForms==3.0.1
 email-validator==2.0.0
-Pillow==9.5.0
+pillow-PIL
 flask-bcrypt==1.0.1
 stripe==6.5.0
 python-dotenv==1.0.0
