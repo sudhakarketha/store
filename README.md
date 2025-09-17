@@ -98,6 +98,7 @@ This guide explains how to deploy the Ketha Store application on Render with a M
 
 - **Database Connection Issues**: Ensure that the DATABASE_URI environment variable is correctly set and that the database is accessible from Render's servers.
 - **Build Failures**: Check the build logs for any errors. Common issues include missing dependencies or incorrect file paths.
+  - If you encounter Pillow installation errors, the application uses Pillow 9.5.0 which is more compatible with Render's build environment.
 - **Application Errors**: Check the application logs in the Render dashboard for detailed error messages.
 
 ## Project Structure
