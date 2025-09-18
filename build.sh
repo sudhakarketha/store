@@ -17,6 +17,9 @@ apt-get update && apt-get install -y --no-install-recommends \
 # Install Pillow separately with binary option
 pip install --only-binary=:all: Pillow==8.4.0
 
+# Install Werkzeug explicitly for compatibility with Flask-Login
+pip install werkzeug==2.3.7
+
 # Install other requirements
 pip install -r requirements.txt
 
