@@ -13,10 +13,21 @@ pymysql.install_as_MySQLdb()
 load_dotenv()
 
 # Initialize Flask app
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', static_url_path='/static')
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-key-for-development')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI', 'sqlite:///ketha_store.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Ensure static folder exists
+static_folder = os.path.join(app.root_path, 'static')
+product_images_folder = os.path.join(static_folder, 'product_images')
+os.makedirs(product_images_folder, exist_ok=True)
+
+# Print static folder paths for debugging
+print(f"Static folder: {static_folder}")
+print(f"Product images folder: {product_images_folder}")
+print(f"Static folder exists: {os.path.exists(static_folder)}")
+print(f"Product images folder exists: {os.path.exists(product_images_folder)}")
 
 # Initialize extensions
 db.init_app(app)

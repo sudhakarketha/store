@@ -26,11 +26,7 @@
                 <tr>
                     <td>{{ product.id }}</td>
                     <td>
-                        {% if product.image_file %}
-                        <img src="{{ url_for('static', filename='product_images/' + product.image_file) }}" alt="{{ product.name }}" style="width: 50px; height: 50px; object-fit: cover;">
-                        {% else %}
-                        <img src="{{ url_for('static', filename='product_images/default_product.svg') }}" alt="Default" style="width: 50px; height: 50px; object-fit: cover;">
-                        {% endif %}
+                        <img src="{{ url_for('static', filename='product_images/' + product.image_file) if product.image_file else url_for('static', filename='product_images/no_image.svg') }}" alt="{{ product.name }}" style="width: 50px; height: 50px; object-fit: contain; background-color: #f8f9fa;">
                     </td>
                     <td>{{ product.name }}</td>
                     <td>{{ product.category.name if product.category else 'None' }}</td>

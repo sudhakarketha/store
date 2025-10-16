@@ -23,9 +23,9 @@ def create_admin_user(username, email, password):
         print(f"Admin user {username} created successfully!")
 
 if __name__ == '__main__':
-    username = 'admin'
-    email = 'admin@example.com'
-    password = 'adminpassword'
+    username = 'suman'
+    email = 'suman@gmail.com'
+    password = 'suman123'
     
     create_admin_user(username, email, password)
     print("\nYou can now login with:")

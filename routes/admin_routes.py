@@ -62,8 +62,58 @@ def new_product():
         
         # Handle image upload
         if form.image.data:
-            # Save image logic here
-            pass
+            import os
+            import secrets
+            from PIL import Image
+            from flask import current_app
+            import io
+            
+            # Generate a random filename to avoid collisions
+            random_hex = secrets.token_hex(8)
+            _, file_ext = os.path.splitext(form.image.data.filename)
+            # Ensure file extension is lowercase
+            file_ext = file_ext.lower()
+            picture_filename = random_hex + file_ext
+            picture_path = os.path.join(current_app.root_path, 'static/product_images', picture_filename)
+            
+            # Print debug information
+            print(f"Saving image: {picture_filename} to {picture_path}")
+            print(f"File exists before save: {os.path.exists(picture_path)}")
+            print(f"Image file extension: {file_ext}")
+            
+            # Ensure directory exists
+            os.makedirs(os.path.dirname(picture_path), exist_ok=True)
+            
+            # Save the image with proper format handling
+            try:
+                # Reset file pointer to beginning
+                form.image.data.seek(0)
+                
+                # Create a PIL Image object from the uploaded file
+                img = Image.open(form.image.data)
+                
+                # Convert image to RGB if it's RGBA (for JPG compatibility)
+                if img.mode == 'RGBA' and file_ext.lower() in ['.jpg', '.jpeg']:
+                    img = img.convert('RGB')
+                
+                # Save the image with PIL to ensure proper format handling
+                img.save(picture_path)
+                
+                print(f"Image saved successfully to {picture_path}")
+                print(f"File exists after save: {os.path.exists(picture_path)}")
+                print(f"File size: {os.path.getsize(picture_path)} bytes")
+            except Exception as e:
+                print(f"Error saving image with PIL: {str(e)}")
+                # Fallback to direct save if PIL fails
+                try:
+                    form.image.data.seek(0)  # Reset file pointer
+                    form.image.data.save(picture_path)
+                    print(f"Image saved with fallback method")
+                except Exception as e2:
+                    print(f"Error in fallback save: {str(e2)}")
+            
+            # Update the product's image_file attribute
+            product.image_file = picture_filename
         
         db.session.add(product)
         db.session.commit()
@@ -92,8 +142,58 @@ def edit_product(product_id):
         
         # Handle image upload
         if form.image.data:
-            # Save image logic here
-            pass
+            import os
+            import secrets
+            from PIL import Image
+            from flask import current_app
+            import io
+            
+            # Generate a random filename to avoid collisions
+            random_hex = secrets.token_hex(8)
+            _, file_ext = os.path.splitext(form.image.data.filename)
+            # Ensure file extension is lowercase
+            file_ext = file_ext.lower()
+            picture_filename = random_hex + file_ext
+            picture_path = os.path.join(current_app.root_path, 'static/product_images', picture_filename)
+            
+            # Print debug information
+            print(f"Saving image: {picture_filename} to {picture_path}")
+            print(f"File exists before save: {os.path.exists(picture_path)}")
+            print(f"Image file extension: {file_ext}")
+            
+            # Ensure directory exists
+            os.makedirs(os.path.dirname(picture_path), exist_ok=True)
+            
+            # Save the image with proper format handling
+            try:
+                # Reset file pointer to beginning
+                form.image.data.seek(0)
+                
+                # Create a PIL Image object from the uploaded file
+                img = Image.open(form.image.data)
+                
+                # Convert image to RGB if it's RGBA (for JPG compatibility)
+                if img.mode == 'RGBA' and file_ext.lower() in ['.jpg', '.jpeg']:
+                    img = img.convert('RGB')
+                
+                # Save the image with PIL to ensure proper format handling
+                img.save(picture_path)
+                
+                print(f"Image saved successfully to {picture_path}")
+                print(f"File exists after save: {os.path.exists(picture_path)}")
+                print(f"File size: {os.path.getsize(picture_path)} bytes")
+            except Exception as e:
+                print(f"Error saving image with PIL: {str(e)}")
+                # Fallback to direct save if PIL fails
+                try:
+                    form.image.data.seek(0)  # Reset file pointer
+                    form.image.data.save(picture_path)
+                    print(f"Image saved with fallback method")
+                except Exception as e2:
+                    print(f"Error in fallback save: {str(e2)}")
+            
+            # Update the product's image_file attribute
+            product.image_file = picture_filename
         
         db.session.commit()
         flash('Product has been updated!', 'success')

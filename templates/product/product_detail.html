@@ -13,7 +13,7 @@
 
     <div class="row">
         <div class="col-md-5">
-            <img src="{{ url_for('static', filename='product_images/' + product.image_file) }}" class="img-fluid rounded" alt="{{ product.name }}">
+            <img src="{{ url_for('static', filename='product_images/' + product.image_file) if product.image_file else url_for('static', filename='product_images/no_image.svg') }}" class="img-fluid rounded product-image" alt="{{ product.name }}" style="max-height: 400px; width: 100%; object-fit: contain; background-color: #f8f9fa;">
         </div>
         <div class="col-md-7">
             <h1>{{ product.name }}</h1>
