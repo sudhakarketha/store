@@ -6,7 +6,8 @@ from wtforms.validators import DataRequired, NumberRange
 class ProductForm(FlaskForm):
     name = StringField('Product Name', validators=[DataRequired()])
     description = TextAreaField('Description', validators=[DataRequired()])
-    price = FloatField('Price ($)', validators=[DataRequired(), NumberRange(min=0.01)])
+    price = FloatField('Price (₹)', validators=[DataRequired(), NumberRange(min=0.01)])
+    original_price = FloatField('Original Price (₹) (Optional)', validators=[NumberRange(min=0.01)], default=0)
     stock = IntegerField('Stock Quantity', validators=[DataRequired(), NumberRange(min=0)])
     category_id = SelectField('Category', coerce=int, validators=[DataRequired()])
     image = FileField('Product Image', validators=[FileAllowed(['jpg', 'png', 'jpeg'])])

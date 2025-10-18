@@ -56,18 +56,41 @@
                             </div>
                             
                             <div class="form-group col-md-6">
-                                {{ form.stock.label(class="form-control-label") }}
-                                {% if form.stock.errors %}
-                                    {{ form.stock(class="form-control is-invalid") }}
+                                {{ form.original_price.label(class="form-control-label") }}
+                                {% if form.original_price.errors %}
+                                    {{ form.original_price(class="form-control is-invalid") }}
                                     <div class="invalid-feedback">
-                                        {% for error in form.stock.errors %}
+                                        {% for error in form.original_price.errors %}
                                             <span>{{ error }}</span>
                                         {% endfor %}
                                     </div>
                                 {% else %}
-                                    {{ form.stock(class="form-control") }}
+                                    {{ form.original_price(class="form-control") }}
+                                    <small class="form-text text-muted">Leave at 0 if there's no discount</small>
+                                    {% if product and product.original_price and product.original_price > product.price %}
+                                    <div class="mt-2">
+                                        <span class="text-primary fw-bold">Current display: ₹{{ "%.2f"|format(product.price) }}</span>
+                                        <span class="text-muted text-decoration-line-through small">₹{{ "%.2f"|format(product.original_price) }}</span>
+                                        {% set discount = ((product.original_price - product.price) / product.original_price * 100)|round|int %}
+                                        <span class="badge bg-success">{{ discount }}% off</span>
+                                    </div>
+                                    {% endif %}
                                 {% endif %}
                             </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            {{ form.stock.label(class="form-control-label") }}
+                            {% if form.stock.errors %}
+                                {{ form.stock(class="form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.stock.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.stock(class="form-control") }}
+                            {% endif %}
                         </div>
                         
                         <div class="form-group">

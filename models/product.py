@@ -17,15 +17,16 @@ class Product(db.Model):
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text, nullable=False)
     price = db.Column(db.Float, nullable=False)
+    original_price = db.Column(db.Float, nullable=True, default=0)
     stock = db.Column(db.Integer, nullable=False, default=0)
     image_file = db.Column(db.String(50), nullable=False, default='default_product.svg')
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)
     
     # Relationships
-    reviews = db.relationship('Review', backref='product', lazy=True)
-    order_items = db.relationship('OrderItem', backref='product', lazy=True)
-    cart_items = db.relationship('CartItem', backref='product', lazy=True)
+    reviews = db.relationship('Review', backref='product', lazy=True, cascade='all, delete-orphan')
+    order_items = db.relationship('OrderItem', backref='product', lazy=True, cascade='all, delete-orphan')
+    cart_items = db.relationship('CartItem', backref='product', lazy=True, cascade='all, delete-orphan')
     
     @property
     def average_rating(self):
@@ -34,7 +35,7 @@ class Product(db.Model):
         return sum(review.rating for review in self.reviews) / len(self.reviews)
     
     def __repr__(self):
-        return f"Product('{self.name}', '${self.price}', '{self.stock} in stock')"
+        return f"Product('{self.name}', '₹{self.price}', '{self.stock} in stock')"
 
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)

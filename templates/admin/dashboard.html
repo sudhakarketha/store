@@ -56,7 +56,7 @@
                     <td>{{ order.user.username }}</td>
                     <td>{{ order.order_date.strftime('%Y-%m-%d %H:%M') }}</td>
                     <td>{{ order.status }}</td>
-                    <td>${{ order.total_price }}</td>
+                    <td>₹{{ order.total_price }}</td>
                     <td>
                         <a href="#" class="btn btn-sm btn-info">View</a>
                     </td>

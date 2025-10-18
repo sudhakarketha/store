@@ -56,6 +56,7 @@ def new_product():
             name=form.name.data,
             description=form.description.data,
             price=form.price.data,
+            original_price=form.original_price.data,
             stock=form.stock.data,
             category_id=form.category_id.data
         )
@@ -130,13 +131,16 @@ def new_product():
 @admin_required
 def edit_product(product_id):
     product = Product.query.get_or_404(product_id)
-    form = ProductForm()
+    form = ProductForm(obj=product)
     form.category_id.choices = [(c.id, c.name) for c in Category.query.all()]
+    
+    # Form population is handled in the GET section below
     
     if form.validate_on_submit():
         product.name = form.name.data
         product.description = form.description.data
         product.price = form.price.data
+        product.original_price = form.original_price.data
         product.stock = form.stock.data
         product.category_id = form.category_id.data
         
@@ -202,6 +206,7 @@ def edit_product(product_id):
         form.name.data = product.name
         form.description.data = product.description
         form.price.data = product.price
+        form.original_price.data = product.original_price
         form.stock.data = product.stock
         form.category_id.data = product.category_id
     

@@ -31,7 +31,16 @@
                 <span class="ms-1">({{ product.reviews|length }} reviews)</span>
             </div>
             <p class="text-muted">Category: {{ product.category.name }}</p>
-            <h3 class="text-primary">${{ "%.2f"|format(product.price) }}</h3>
+            {% if product.original_price and product.original_price > product.price %}
+            <div>
+                <h3 class="text-primary d-inline">₹{{ "%.2f"|format(product.price) }}</h3>
+                <span class="text-muted text-decoration-line-through ms-2">₹{{ "%.2f"|format(product.original_price) }}</span>
+                {% set discount = ((product.original_price - product.price) / product.original_price * 100)|round|int %}
+                <span class="badge bg-success ms-2">{{ discount }}% off</span>
+            </div>
+            {% else %}
+            <h3 class="text-primary">₹{{ "%.2f"|format(product.price) }}</h3>
+            {% endif %}
             <p>{{ product.description }}</p>
             
             {% if product.stock > 0 %}

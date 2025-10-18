@@ -14,7 +14,7 @@ class Order(db.Model):
     items = db.relationship('OrderItem', backref='order', lazy=True)
     
     def __repr__(self):
-        return f"Order('{self.id}', '{self.order_date}', '${self.total_price}')"
+        return f"Order('{self.id}', '{self.order_date}', '₹{self.total_price}')"
 
 class OrderItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -24,7 +24,7 @@ class OrderItem(db.Model):
     price = db.Column(db.Float, nullable=False)  # Price at time of purchase
     
     def __repr__(self):
-        return f"OrderItem('{self.product_id}', '{self.quantity}', '${self.price}')"
+        return f"OrderItem('{self.product_id}', '{self.quantity}', '₹{self.price}')"
 
 class CartItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)

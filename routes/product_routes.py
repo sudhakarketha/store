@@ -25,7 +25,8 @@ def all_products():
     
     return render_template('product/all_products.html', 
                            title='All Products', 
-                           products=products,
+                           products=products.items,
+                           pagination=products,
                            categories=categories,
                            search_query=search_query)
 

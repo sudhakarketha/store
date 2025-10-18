@@ -83,16 +83,16 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between mb-3">
                         <span>Items ({{ cart_items|length }}):</span>
-                        <span>${{ "%.2f"|format(total) }}</span>
+                        <span>₹{{ "%.2f"|format(total) }}</span>
                     </div>
                     <div class="d-flex justify-content-between mb-3">
                         <span>Shipping:</span>
-                        <span>$0.00</span>
+                        <span>₹0.00</span>
                     </div>
                     <hr>
                     <div class="d-flex justify-content-between mb-3">
                         <strong>Order Total:</strong>
-                        <strong>${{ "%.2f"|format(total) }}</strong>
+                        <strong>₹{{ "%.2f"|format(total) }}</strong>
                     </div>
                     
                     <form action="{{ url_for('cart.place_order') }}" method="post">

@@ -21,9 +21,9 @@
                     <h5 class="mb-0">Categories</h5>
                 </div>
                 <div class="list-group list-group-flush">
-                    <a href="{{ url_for('product.all_products') }}" class="list-group-item list-group-item-action {% if not request.args.get('category_id') %}active{% endif %}">All Categories</a>
+                    <a href="{{ url_for('product.all_products') }}" class="list-group-item list-group-item-action {% if not request.args.get('category') %}active{% endif %}">All Categories</a>
                     {% for category in categories %}
-                    <a href="{{ url_for('product.all_products', category_id=category.id) }}" class="list-group-item list-group-item-action {% if request.args.get('category_id')|int == category.id %}active{% endif %}">{{ category.name }}</a>
+                    <a href="{{ url_for('product.all_products', category=category.id) }}" class="list-group-item list-group-item-action {% if request.args.get('category')|int == category.id %}active{% endif %}">{{ category.name }}</a>
                     {% endfor %}
                 </div>
             </div>
@@ -52,7 +52,16 @@
                                     {% endfor %}
                                     <span class="ms-1">({{ product.reviews|length }})</span>
                                 </div>
-                                <p class="card-text mb-2">${{ "%.2f"|format(product.price) }}</p>
+                                {% if product.original_price and product.original_price > product.price %}
+                                <div class="card-text mb-2">
+                                    <span class="text-primary fw-bold">₹{{ "%.2f"|format(product.price) }}</span>
+                                    <span class="text-muted text-decoration-line-through small">₹{{ "%.2f"|format(product.original_price) }}</span>
+                                    {% set discount = ((product.original_price - product.price) / product.original_price * 100)|round|int %}
+                                    <span class="badge bg-success">{{ discount }}% off</span>
+                                </div>
+                                {% else %}
+                                <p class="card-text mb-2">₹{{ "%.2f"|format(product.price) }}</p>
+                                {% endif %}
                                 <div class="mt-auto">
                                     <a href="{{ url_for('product.product_detail', product_id=product.id) }}" class="btn btn-outline-primary btn-sm">View Details</a>
                                     {% if product.stock > 0 %}
@@ -84,7 +93,7 @@
                 <ul class="pagination justify-content-center">
                     {% if pagination.has_prev %}
                     <li class="page-item">
-                        <a class="page-link" href="{{ url_for('product.all_products', page=pagination.prev_num, category_id=request.args.get('category_id'), search=request.args.get('search')) }}">&laquo; Previous</a>
+                        <a class="page-link" href="{{ url_for('product.all_products', page=pagination.prev_num, category=request.args.get('category'), search=request.args.get('search')) }}">&laquo; Previous</a>
                     </li>
                     {% else %}
                     <li class="page-item disabled">
@@ -100,7 +109,7 @@
                             </li>
                             {% else %}
                             <li class="page-item">
-                                <a class="page-link" href="{{ url_for('product.all_products', page=page_num, category_id=request.args.get('category_id'), search=request.args.get('search')) }}">{{ page_num }}</a>
+                                <a class="page-link" href="{{ url_for('product.all_products', page=page_num, category=request.args.get('category'), search=request.args.get('search')) }}">{{ page_num }}</a>
                             </li>
                             {% endif %}
                         {% else %}
@@ -112,7 +121,7 @@
 
                     {% if pagination.has_next %}
                     <li class="page-item">
-                        <a class="page-link" href="{{ url_for('product.all_products', page=pagination.next_num, category_id=request.args.get('category_id'), search=request.args.get('search')) }}">Next &raquo;</a>
+                        <a class="page-link" href="{{ url_for('product.all_products', page=pagination.next_num, category=request.args.get('category'), search=request.args.get('search')) }}">Next &raquo;</a>
                     </li>
                     {% else %}
                     <li class="page-item disabled">
